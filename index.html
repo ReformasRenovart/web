@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renovart - Reformas Bien Gestionadas</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-teal: #0d9488;
+            --primary-teal-dark: #0f766e;
+            --accent-orange: #f97316;
+            --accent-orange-hover: #ea580c;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; }
+        ul { list-style: none; }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-orange);
+            color: var(--white);
+            border: 2px solid var(--accent-orange);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-orange-hover);
+            border-color: var(--accent-orange-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-teal);
+            border: 2px solid var(--primary-teal);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-teal);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 3rem auto;
+            font-size: 1.1rem;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-teal);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px 0;
+            background: linear-gradient(135deg, #f0fdfa 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .hero-text h1 span {
+            color: var(--primary-teal);
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-image:hover img {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-teal);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background-color: #f0fdfa;
+            color: var(--primary-teal);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 25px auto;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+        }
+
+        /* Specialties Grid */
+        .specialties {
+            padding: 80px 0;
+            background-color: var(--bg-light);
+        }
+
+        .specialties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .specialty-item {
+            background: var(--white);
+            padding: 25px 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .specialty-item:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-3px);
+        }
+
+        .specialty-item i {
+            font-size: 2rem;
+            color: var(--text-light);
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .specialty-item:hover i {
+            color: var(--primary-teal);
+        }
+
+        .specialty-item span {
+            display: block;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        /* Methodology Section */
+        .methodology {
+            padding: 100px 0;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            position: relative;
+        }
+
+        .step-card {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-teal);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin: 0 auto 20px auto;
+            box-shadow: 0 0 0 8px #f0fdfa;
+        }
+
+        .step-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .step-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* Why Renovart */
+        .why-us {
+            padding: 100px 0;
+            background-color: var(--primary-teal);
+            color: var(--white);
+        }
+
+        .why-us .section-title, 
+        .why-us .section-subtitle {
+            color: var(--white);
+        }
+        
+        .why-us .section-subtitle {
+            opacity: 0.9;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-box i {
+            font-size: 2rem;
+            color: var(--accent-orange);
+            margin-bottom: 20px;
+        }
+
+        .feature-box h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .feature-box p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Trust Block */
+        .trust-block {
+            padding: 80px 0;
+            text-align: center;
+            background-color: var(--white);
+        }
+
+        .trust-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .trust-content h3 {
+            font-size: 2rem;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .trust-content p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background-color: var(--accent-orange);
+            padding: 80px 0;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 800;
+        }
+
+        .btn-white {
+            background-color: var(--white);
+            color: var(--accent-orange);
+            padding: 16px 40px;
+            font-size: 1.1rem;
+        }
+
+        .btn-white:hover {
+            background-color: #f1f1f1;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            padding: 60px 0 30px 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .footer-info p {
+            color: #94a3b8;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links h4 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 30px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #20BA5A;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text p {
+                margin: 0 auto 40px auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-image {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .hero-image img {
+                transform: none;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-card {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                gap: 20px;
+            }
+            
+            .step-number {
+                margin: 0;
+                flex-shrink: 0;
+            }
+
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img src="https://i.postimg.cc/nV1fkgJk/logo_color.png" alt="Renovart Logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#metodo">Cómo trabajamos</a></li>
+                    <li><a href="#nosotros">Por qué Renovart</a></li>
+                    <li><a href="https://wa.me/34647928814?text=Hola,%20me%20gustaría%20solicitar%20un%20presupuesto%20para%20mi%20reforma" class="btn btn-primary" style="padding: 8px 20px;" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Presupuesto</a></li>
+                </ul>
+                <div class="mobile-menu-btn">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Reformas bien gestionadas, <span>sin sorpresas</span></h1>
+                    <p>Coordinamos y supervisamos reformas integrales, parciales y microservicios con profesionales cualificados.</p>
+                    <div class="hero-buttons">
+                        <a href="https://wa.me/34647928814?text=Hola,%20me%20gustaría%20solicitar%20un%20presupuesto%20para%20mi%20reforma" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Solicitar presupuesto</a>
+                        <a href="#servicios" class="btn btn-secondary">Ver servicios</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://image.qwenlm.ai/public_source/90c19bcd-e138-43e5-b829-9d3f3271dbd6/16ba2c3f6-f32a-4fb4-9d75-46c941ec8832.png" alt="Reforma moderna y profesional">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="services">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <p class="section-subtitle">Soluciones integrales adaptadas a la magnitud de tu proyecto, siempre con supervisión experta.</p>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-house-chimney"></i>
+                    </div>
+                    <h3>Reformas Integrales</h3>
+                    <p>Gestión completa de tu vivienda o local. Desde el diseño inicial hasta la entrega de llaves, coordinando todos los gremios.</p>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-paint-roller"></i>
+                    </div>
+                    <h3>Reformas Parciales</h3>
+                    <p>Renovación de estancias específicas como cocinas, baños o salones. Optimizamos tiempos y recursos para resultados rápidos.</p>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </div>
+                    <h3>Microservicios</h3>
+                    <p>Pequeñas reparaciones y mantenimientos puntuales. Soluciones ágiles para esos detalles que no pueden esperar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialties Grid -->
+    <section class="specialties">
+        <div class="container">
+            <h2 class="section-title" style="font-size: 2rem;">Especialidades y Oficios</h2>
+            <div class="specialties-grid">
+                <div class="specialty-item">
+                    <i class="fa-solid fa-faucet"></i>
+                    <span>Fontanería</span>
+                </div>
+                <div class="specialty-item">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Electricidad</span>
+                </div>
+                <div class="specialty-item">
+                    <i class="fa-solid fa-trowel-bricks"></i>
+                    <span>Albañilería</span>
+                </div>
+                <div class="specialty-item">
+                    <i class="fa-solid fa-door-open"></i>
+                    <span>Carpintería</span>
+                </div>
+                <div class="specialty-item">
+                    <i class="fa-solid fa-paintbrush"></i>
+                    <span>Pintura</span>
+                </div>
+                <div class="specialty-item">
+                    <i class="fa-solid fa-key"></i>
+                    <span>Cerrajería</span>
+                </div>
+                <div class="specialty-item">
+                    <i class="fa-solid fa-snowflake"></i>
+                    <span>Climatización</span>
+                </div>
+                <div class="specialty-item">
+                    <i class="fa-solid fa-ellipsis"></i>
+                    <span>y más...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="metodo" class="methodology">
+        <div class="container">
+            <h2 class="section-title">Cómo Trabajamos</h2>
+            <p class="section-subtitle">Un proceso transparente y ordenado para tu tranquilidad.</p>
+            
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h4>Análisis y Visita</h4>
+                    <p>Evaluamos tu espacio y entendemos tus necesidades in situ.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h4>Presupuesto Claro</h4>
+                    <p>Documento detallado sin letras pequeñas ni costes ocultos.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h4>Asignación</h4>
+                    <p>Seleccionamos al equipo de profesionales ideal para tu proyecto.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h4>Coordinación</h4>
+                    <p>Supervisamos la ejecución diaria para cumplir plazos y calidad.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <h4>Entrega Final</h4>
+                    <p>Revisión conjunta y entrega de tu nuevo espacio listo para usar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Renovart -->
+    <section id="nosotros" class="why-us">
+        <div class="container">
+            <h2 class="section-title">Por qué Renovart</h2>
+            <p class="section-subtitle">No somos solo un gremio, somos gestión y control.</p>
+            
+            <div class="features-grid">
+                <div class="feature-box">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <h4>Un único interlocutor</h4>
+                    <p>Olvídate de coordinar fontaneros, electricistas y pintores. Nosotros nos encargamos de todo.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-user-check"></i>
+                    <h4>Profesionales Verificados</h4>
+                    <p>Trabajamos exclusivamente con subcontratas cualificadas y de confianza.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                    <h4>Presupuestos Claros</h4>
+                    <p>Transparencia total en costes. Sabrás exactamente en qué se invierte tu dinero.</p>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-clock"></i>
+                    <h4>Cumplimiento de Plazos</h4>
+                    <p>Planificación rigurosa para entregar tu reforma en la fecha acordada.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Block -->
+    <section class="trust-block">
+        <div class="container trust-content">
+            <h3>Consultoría en reformas, rehabilitaciones y mantenimientos</h3>
+            <p>Nuestro enfoque se basa en el control, la experiencia y, sobre todo, en la tranquilidad del cliente. Transformamos espacios complejos en realidades sencillas.</p>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="contacto" class="final-cta">
+        <div class="container">
+            <h2>Cuéntanos tu proyecto por WhatsApp y te enviamos un presupuesto sin compromiso</h2>
+            <a href="https://wa.me/34647928814?text=Hola,%20me%20gustaría%20solicitar%20un%20presupuesto%20para%20mi%20reforma" class="btn btn-white" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-whatsapp"></i> Solicitar presupuesto por WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <a href="#" class="footer-logo">
+                        <img src="https://i.postimg.cc/fWvQKpN1/Logo_blanco.png" alt="Renovart Logo Blanco">
+                    </a>
+                    <p><i class="fa-solid fa-envelope"></i> comercial.renovart@renovart.com</p>
+                    <p><i class="fa-brands fa-whatsapp"></i> +34 647 928 814</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#metodo">Metodología</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Aviso Legal</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Política de Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Renovart. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/34647928814?text=Hola,%20me%20gustaría%20solicitar%20un%20presupuesto%20para%20mi%20reforma" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Simple Mobile Menu Toggle (Visual only for this demo)
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileBtn.addEventListener('click', () => {
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '80px';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.background = 'white';
+                navLinks.style.padding = '20px';
+                navLinks.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Reset nav display on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'row';
+                navLinks.style.position = 'static';
+                navLinks.style.boxShadow = 'none';
+                navLinks.style.padding = '0';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
+
